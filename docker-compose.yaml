@@ -6,7 +6,7 @@ services:
       start-single-node --certs-dir=/cockroach/certs --advertise-addr=localhost --http-addr=0.0.0.0:8081
     environment:
       - COCKROACH_USER=root
-      - COCKROACH_PASSWORD=suraj@1234
+      - COCKROACH_PASSWORD=suraj
     volumes:
       - './cockroach-data/crdb:/cockroach/cockroach-data'
       - './cockroach-certs:/cockroach/certs'

@@ -7,8 +7,9 @@ CA_KEY=$CERTS_DIR/ca.key
 # Create certificates if not already generated
 if [ ! -f "$CA_KEY" ]; then
   echo "Generating certificates..."
+  # Include custom domain (cockroachdb.saisurajch.me) in the certificate generation
   cockroach cert create-ca --certs-dir=$CERTS_DIR --ca-key=$CA_KEY
-  cockroach cert create-node localhost 127.0.0.1 ::1 --certs-dir=$CERTS_DIR --ca-key=$CA_KEY
+  cockroach cert create-node cockroachdb.saisurajch.me 127.0.0.1 ::1 --certs-dir=$CERTS_DIR --ca-key=$CA_KEY
   cockroach cert create-client root --certs-dir=$CERTS_DIR --ca-key=$CA_KEY
   cockroach cert create-client app_user --certs-dir=$CERTS_DIR --ca-key=$CA_KEY
 fi

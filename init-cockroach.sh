@@ -4,6 +4,11 @@
 CERTS_DIR=/cockroach/certs
 CA_KEY=$CERTS_DIR/ca.key
 
+# Get environment variables
+COCKROACH_USER=${COCKROACH_USER:-root}  # Default to 'root' if not set
+COCKROACH_PASSWORD=${COCKROACH_PASSWORD:-suraj@1234}  # Default password if not set
+COCKROACH_DB=${COCKROACH_DB:-defaultdb}  # Default to 'defaultdb' if not set
+
 # Create certificates if not already generated
 if [ ! -f "$CA_KEY" ]; then
   echo "Generating certificates..."
@@ -23,9 +28,9 @@ sleep 5
 # Create users and set passwords
 echo "Creating users and setting passwords..."
 cockroach sql --certs-dir=$CERTS_DIR <<EOF
-ALTER USER root WITH PASSWORD 'suraj@1234';
-CREATE USER app_user WITH PASSWORD 'suraj@1234';
-GRANT ALL ON DATABASE defaultdb TO app_user;
+ALTER USER $COCKROACH_USER WITH PASSWORD '$COCKROACH_PASSWORD';
+CREATE USER app_user WITH PASSWORD '$COCKROACH_PASSWORD';
+GRANT ALL ON DATABASE $COCKROACH_DB TO app_user;
 EOF
 
 # Stop the background process

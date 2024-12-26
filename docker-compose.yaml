@@ -1,0 +1,16 @@
+version: '3.5'
+services:
+  crdb:
+    image: 'cockroachdb/cockroach:latest-v23.1'
+    command: >
+      start-single-node --certs-dir=/cockroach/certs --advertise-addr=localhost
+    environment:
+      - COCKROACH_USER=root
+      - COCKROACH_PASSWORD=suraj@1234
+    volumes:
+      - './cockroach-data/crdb:/cockroach/cockroach-data'
+      - './cockroach-certs:/cockroach/certs'
+      - './init-cockroach.sh:/docker-entrypoint-initdb.d/init-cockroach.sh'
+    ports:
+      - "26257:26257"
+      - "8081:8081"

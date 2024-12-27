@@ -27,7 +27,7 @@ sleep 5
 
 # Create users and set passwords
 echo "Creating users and setting passwords..."
-cockroach sql --certs-dir=$CERTS_DIR <<EOF
+cockroach sql --certs-dir=$CERTS_DIR --host=0.0.0.0<<EOF
 ALTER USER $COCKROACH_USER WITH PASSWORD '$COCKROACH_PASSWORD';
 CREATE USER app_user WITH PASSWORD '$COCKROACH_PASSWORD';
 GRANT ALL ON DATABASE $COCKROACH_DB TO app_user;

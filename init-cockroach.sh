@@ -5,9 +5,9 @@ CERTS_DIR=/cockroach/certs
 CA_KEY=$CERTS_DIR/ca.key
 
 # Get environment variables
-COCKROACH_USER=${COCKROACH_USER:-root}  # Default to 'root' if not set
-COCKROACH_PASSWORD=${COCKROACH_PASSWORD:-suraj}  # Default password if not set
-COCKROACH_DB=${COCKROACH_DB:-defaultdb}  # Default to 'defaultdb' if not set
+COCKROACH_USER=root  # Default to 'root' if not set
+COCKROACH_PASSWORD=suraj  # Default password if not set
+COCKROACH_DB=defaultdb  # Default to 'defaultdb' if not set
 
 # Create certificates if not already generated
 if [ ! -f "$CA_KEY" ]; then

@@ -3,7 +3,7 @@ services:
   crdb:
     image: 'cockroachdb/cockroach:latest-v23.1'
     command: >
-      start-single-node --certs-dir=/cockroach/certs --advertise-addr=0.0.0.0 --http-addr=0.0.0.0:8081
+      start-single-node --certs-dir=/cockroach/certs --advertise-addr=0.0.0.0 --http-addr=0.0.0.0:${HTTP_PORT}
     environment:
       - COCKROACH_USER=root
       - COCKROACH_PASSWORD=suraj
@@ -12,5 +12,6 @@ services:
       - './cockroach-certs:/cockroach/certs'
       - './init-cockroach.sh:/docker-entrypoint-initdb.d/init-cockroach.sh'
     ports:
-      - "26257:26257"
-      - "8081:8081"
+      - "${SQL_PORT}:26257"
+      - "${HTTP_PORT}:8081"
+
